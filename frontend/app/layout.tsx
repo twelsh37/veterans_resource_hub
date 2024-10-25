@@ -5,6 +5,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { useRouteProtection } from "./routes";
+import RouteProtection from "./RouteProtection";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,11 +33,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider appearance={{ baseTheme: undefined  }} dynamic>
+      <ClerkProvider appearance={{ baseTheme: undefined }} dynamic>
         <body className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex-grow mt-[100px] mb-[50px]">  {/* Adjust mt and mb based on your header and footer heights */}
-            {children}
+          <main className="flex-grow">
+            <RouteProtection>{children}</RouteProtection>
           </main>
           <Footer />
         </body>
