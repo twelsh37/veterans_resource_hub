@@ -3,13 +3,15 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
-import { useAuth, SignInButton, UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
+import { useClerk } from "@clerk/clerk-react";
 
 export default function Header() {
   const [isClient, setIsClient] = useState(false);
   const { isSignedIn } = useAuth();
   const router = useRouter();
+  const { openSignIn } = useClerk();
 
   useEffect(() => {
     setIsClient(true);
@@ -38,19 +40,12 @@ export default function Header() {
               />
             ) : (
               <>
-                <SignInButton mode="modal">
-                  <Button 
-                    variant="outline" 
-                    className="mr-2 bg-white bg-opacity-80 hover:bg-opacity-100"
-                  >
-                    Login
-                  </Button>
-                </SignInButton>
                 <Button 
-                  onClick={() => router.push('/sign-up')}
-                  className="bg-white text-blue-600 hover:bg-opacity-90"
+                  variant="outline" 
+                  className="mr-2 bg-white bg-opacity-80 hover:bg-opacity-100"
+                  onClick={() => openSignIn()}
                 >
-                  Sign up
+                  Login
                 </Button>
               </>
             )}
