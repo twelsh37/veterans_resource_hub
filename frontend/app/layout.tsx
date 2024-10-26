@@ -5,8 +5,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { useRouteProtection } from "./routes";
-import RouteProtection from "./RouteProtection";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,11 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider appearance={{ baseTheme: undefined }} dynamic>
-        <body className="flex flex-col min-h-screen">
+        <body className={inter.className} suppressHydrationWarning={true}>
           <Header />
-          <main className="flex-grow">
-            <RouteProtection>{children}</RouteProtection>
-          </main>
+          {children}
           <Footer />
         </body>
       </ClerkProvider>
