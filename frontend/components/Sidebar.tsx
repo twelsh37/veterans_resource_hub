@@ -12,6 +12,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu, Home, User, Settings, FileText } from "lucide-react";
 
+/**
+ * Array of sidebar navigation items
+ * Each item has a name, href (link), and an icon component
+ */
 const sidebarItems = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Profile', href: '/profile', icon: User },
@@ -19,16 +23,27 @@ const sidebarItems = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
+/**
+ * Sidebar component
+ * 
+ * This component renders a responsive sidebar navigation menu.
+ * On mobile devices, it appears as a slide-out sheet.
+ * 
+ * @returns {JSX.Element} The Sidebar component
+ */
 export function Sidebar() {
+  // Get the current pathname for active link styling
   const pathname = usePathname();
 
   return (
     <Sheet>
+      {/* Mobile menu trigger button */}
       <SheetTrigger asChild>
         <Button variant="outline" size="icon" className="md:hidden">
           <Menu className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </SheetTrigger>
+      {/* Sidebar content */}
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <nav className="flex flex-col space-y-4">
           {sidebarItems.map((item) => (

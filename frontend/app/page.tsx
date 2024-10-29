@@ -6,7 +6,7 @@ export default function LandingPage() {
       {/* <Header /> */}
       <main className="container mx-auto pt-20 px-4">
         <h1 className="text-4xl font-bold mb-4">Welcome to Our Site</h1>
-        <p className="text-xl">This is the landing page for new visitors.</p>
+        <p className="text-xl">This is the FRONTEND PAGE for new visitors.</p>
       </main>
     </div>
   )

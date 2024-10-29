@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
-import Image from 'next/image'
 
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false)
@@ -11,16 +10,9 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-10">
         <div className="relative h-16">
-          <Image
-            src="/flag-sky-background.jpg"
-            alt="American flag with sky background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-          />
           <div className="absolute inset-0 bg-black bg-opacity-30"> {/* This adds a slight dark overlay to ensure text is readable */}
             <div className="container mx-auto px-4 py-2 flex justify-between items-center h-full">
-              <div className="text-2xl font-bold text-white">Logo</div>
+              <div className="text-2xl font-bold text-white">BIG FAT LOGO</div>
               <nav>
                 <Button 
                   variant="outline" 
