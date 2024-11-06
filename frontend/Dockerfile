@@ -29,6 +29,8 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder --chown=appuser:appgroup /app/package.json ./
 COPY --from=builder --chown=appuser:appgroup /app/yarn.lock ./
 COPY --from=builder --chown=appuser:appgroup /app/tsconfig.json ./
+COPY --from=builder --chown=appuser:appgroup /app/tailwind.config.ts ./
+COPY --from=builder --chown=appuser:appgroup /app/postcss.config.mjs ./
 
 # Install dependencies based on environment
 RUN if [ "$BUILD_ENV" = "production" ]; then \
@@ -37,7 +39,7 @@ RUN if [ "$BUILD_ENV" = "production" ]; then \
     yarn install; \
     fi
 
-# For production, copy the built .next directory
+# For production, copy .next directory if it exists
 RUN if [ "$BUILD_ENV" = "production" ]; then \
     mkdir -p .next; \
     fi
@@ -48,10 +50,9 @@ COPY --from=builder --chown=appuser:appgroup /app/app ./app
 COPY --from=builder --chown=appuser:appgroup /app/components ./components
 COPY --from=builder --chown=appuser:appgroup /app/lib ./lib
 
-# Only copy .next directory for production
-RUN if [ "$BUILD_ENV" = "production" ]; then \
-    COPY --from=builder --chown=appuser:appgroup /app/.next ./.next; \
-    fi
+# Add debug commands to verify file structure
+RUN ls -la /app/app/styles
+RUN cat /app/app/styles/globals.css
 
 # Ensure proper permissions
 RUN chown -R appuser:appgroup /app
@@ -59,21 +60,13 @@ RUN chown -R appuser:appgroup /app
 # Use non-root user
 USER appuser
 
-# Define environment variables but don't set values
-ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=""
-ENV CLERK_SECRET_KEY=""
-ENV VA_FORMS_API_KEY=""
-
 # Always expose 3001 (Next.js default port)
 EXPOSE 3001
 
-# Add this before the CMD to debug
+# Add these debug commands to verify the files
 RUN ls -la /app
 RUN ls -la /app/app
+RUN ls -la /app/app/styles
 
-# Start the server based on environment
-CMD if [ "$BUILD_ENV" = "production" ]; then \
-    yarn start; \
-    else \
-    yarn dev; \
-    fi
+# Start the server based on environment using JSON format
+CMD ["sh", "-c", "if [ \"$BUILD_ENV\" = \"production\" ]; then yarn start; else yarn dev; fi"]
