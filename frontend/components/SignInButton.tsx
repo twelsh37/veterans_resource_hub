@@ -23,11 +23,12 @@ export default function SignInButton() {
    */
   const handleSignIn = async () => {
     try {
-      // Attempt to create a sign-in session with Clerk
+      if (!signIn) throw new Error("Sign in is not available");
+      
       await signIn.create({
         strategy: "oauth_google",
         redirectUrl: "/sso-callback",
-        redirectUrlComplete: "/welcome",
+        actionCompleteRedirectUrl: "/welcome",
       });
     } catch (err) {
       console.error("Error during sign in:", err);

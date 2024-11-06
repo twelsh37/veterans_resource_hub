@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu, Home, User, Settings, FileText } from "lucide-react";
 
+
 /**
  * Array of sidebar navigation items
  * Each item has a name, href (link), and an icon component
