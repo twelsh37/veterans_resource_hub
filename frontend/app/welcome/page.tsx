@@ -17,7 +17,7 @@ export default async function WelcomePage() {
       
       {/* Main Content - with margin to account for sidebar */}
       <main className="ml-64 flex-1 p-8">
-        <h1 className="text-4xl font-bold mb-4">Hello, {user?.firstName}!</h1>
+        <h1 className="text-4xl font-bold mb-4">Hello, {user?.firstName || user?.username || 'Guest'}!</h1>
         <p className="text-xl">This is page is displayed for LOGGED IN visitors.</p>
       </main>
     </div>
