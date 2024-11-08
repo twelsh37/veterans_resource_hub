@@ -1,7 +1,6 @@
 'use client';
 
 import Sidebar from '@/components/Sidebar';
-import Header from '@/components/Header';
 
 export default function AuthLayout({
   children,
@@ -13,7 +12,9 @@ export default function AuthLayout({
       <div className="flex">
         <Sidebar />
         <main className="ml-64 flex-1 p-8">
-          {children}
+          <div className="bg-grey-100 rounded-xl p-6 min-h-[calc(100vh-4rem)]">
+            {children}
+          </div>
         </main>
       </div>
     </div>

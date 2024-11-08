@@ -11,17 +11,34 @@ export default function Sidebar() {
       <nav className="flex flex-col gap-4 p-6 mt-8">
         <Link 
           href="/welcome"
-          className={`p-2 rounded ${pathname === '/welcome' ? 'bg-gray-100' : ''}`}
+          className={`p-2 rounded transition-all duration-300 transform hover:scale-104
+            ${pathname === '/welcome' 
+              ? 'text-[#0A3161]' 
+              : 'hover:text-[#0A3161]'
+            }`}
         >
           Welcome
         </Link>
         <Link 
           href="/profile"
-          className={`p-2 rounded ${pathname === '/profile' ? 'bg-gray-100' : ''}`}
+          className={`p-2 rounded transition-all duration-300 transform hover:scale-104 
+            ${pathname === '/profile' 
+              ? 'text-[#0A3161]' 
+              : 'hover:text-[#0A3161]'
+            }`}
         >
           Profile
         </Link>
-        {/* other navigation items */}
+        <Link 
+          href="/settings"
+          className={`p-2 rounded transition-all duration-300 transform hover:scale-104 
+            ${pathname === '/settings' 
+              ? 'text-[#0A3161]' 
+              : 'hover:text-[#0A3161]'
+            }`}
+        >
+          Settings
+        </Link>
       </nav>
     </aside>
   );
