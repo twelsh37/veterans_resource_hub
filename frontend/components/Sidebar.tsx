@@ -10,14 +10,14 @@ export default function Sidebar() {
     <aside className="w-64 bg-white shadow-lg h-screen fixed left-0">
       <nav className="flex flex-col gap-4 p-6 mt-8">
         <Link 
-          href="/welcome"
-          className={`p-2 rounded transition-all duration-300 transform hover:scale-104
-            ${pathname === '/welcome' 
+          href="/dashboard"
+          className={`p-2 rounded transition-all duration-300 transform hover:scale-104 
+            ${pathname === '/dashboard' 
               ? 'text-[#0A3161]' 
               : 'hover:text-[#0A3161]'
             }`}
         >
-          Welcome
+          Dashboard
         </Link>
         <Link 
           href="/profile"

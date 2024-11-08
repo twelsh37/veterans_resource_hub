@@ -1,16 +1,10 @@
-import type { Metadata } from "next";
-import './globals.css';
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: "Veterans Resource Hub",
-  description: "VA Resources",
-};
 
 export default function RootLayout({
   children,
@@ -19,10 +13,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider appearance={{ baseTheme: 'light' }} dynamic={true}>
+      <ClerkProvider dynamic={true}>
         <body className={inter.className}>
           <Header />
-          {children}
+          <main className="min-h-screen">
+            {children}
+          </main>
           <Footer />
         </body>
       </ClerkProvider>

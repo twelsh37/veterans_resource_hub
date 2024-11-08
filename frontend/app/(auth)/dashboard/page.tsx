@@ -4,14 +4,13 @@ import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function ProfilePage() {
+export default function DashboardPage() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    console.log('Profile page mounted', { user, isLoaded });
+    console.log('Dashboard mounted', { user, isLoaded });
     
-    // If user is not authenticated after loading, redirect to sign-in
     if (isLoaded && !user) {
       router.push('/sign-in');
     }
@@ -19,29 +18,23 @@ export default function ProfilePage() {
 
   if (!isLoaded) {
     return (
-      <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
+      <div className="flex justify-center items-center">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
       </div>
     );
   }
 
   if (!user) {
-    return null; // We'll handle this in the useEffect
+    return null;
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-        <div className="space-y-4">
-          <div>
-            <label className="font-semibold">Email:</label>
-            <p>{user.primaryEmailAddress?.emailAddress}</p>
-          </div>
-          <div>
-            <label className="font-semibold">Name:</label>
-            <p>{user.firstName} {user.lastName}</p>
-          </div>
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Welcome {user.firstName}</h2>
+          <p>This is your dashboard</p>
         </div>
       </div>
     </div>
