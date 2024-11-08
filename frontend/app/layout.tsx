@@ -19,20 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ClerkProvider 
-          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-          appearance={{ baseTheme: null }}
-          options={{
-            debug: true,
-            isSsr: true
-          }}
-        >
+      <ClerkProvider appearance={{ baseTheme: 'light' }} dynamic={true}>
+        <body className={inter.className}>
           <Header />
           {children}
           <Footer />
-        </ClerkProvider>
-      </body>
+        </body>
+      </ClerkProvider>
     </html>
   )
 } 

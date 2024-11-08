@@ -1,45 +1,21 @@
 'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Sidebar from '@/components/Sidebar';
+import Header from '@/components/Header';
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname();
-  
   return (
-    <div className="min-h-screen bg-gray-100 flex">
-      {/* Permanent Sidebar */}
-      <aside className="w-64 bg-white shadow-lg h-screen fixed left-0">
-        <nav className="flex flex-col gap-4 p-6 mt-8">
-          <Link 
-            href="/dashboard" 
-            className={`text-lg hover:text-gray-600 ${pathname === '/dashboard' ? 'font-bold' : ''}`}
-          >
-            Dashboard
-          </Link>
-          <Link 
-            href="/profile" 
-            className={`text-lg hover:text-gray-600 ${pathname === '/profile' ? 'font-bold' : ''}`}
-          >
-            Profile
-          </Link>
-          <Link 
-            href="/settings" 
-            className={`text-lg hover:text-gray-600 ${pathname === '/settings' ? 'font-bold' : ''}`}
-          >
-            Settings
-          </Link>
-        </nav>
-      </aside>
-      
-      {/* Main Content */}
-      <main className="ml-64 flex-1 p-8">
-        {children}
-      </main>
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex">
+        <Sidebar />
+        <main className="ml-64 flex-1 p-8">
+          {children}
+        </main>
+      </div>
     </div>
   );
 } 
