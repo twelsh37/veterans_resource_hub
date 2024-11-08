@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import './globals.css';
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-
-
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +12,6 @@ export const metadata: Metadata = {
   description: "VA Resources",
 };
 
-
 export default function RootLayout({
   children,
 }: {
@@ -23,11 +19,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ClerkProvider dynamic={true}>
+      <body className={inter.className}>
+        <ClerkProvider 
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+          appearance={{ baseTheme: null }}
+          options={{
+            debug: true,
+            isSsr: true
+          }}
+        >
           <Header />
           {children}
-          <Footer />  
+          <Footer />
         </ClerkProvider>
       </body>
     </html>
