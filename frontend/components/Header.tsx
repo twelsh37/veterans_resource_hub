@@ -4,8 +4,22 @@ import { Button } from "@/components/ui/button"
 import { useAuth, UserButton } from "@clerk/nextjs";
 import { useClerk } from "@clerk/clerk-react";
 import { AuthSection } from "./AuthSection";
-
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 export default function Header() {
+  const { isSignedIn, isLoaded } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.push('/welcome');
+    }
+  }, [isLoaded, isSignedIn, router]);
+
+  const handleSignIn = () => {
+    router.push('/sign-in');
+  };
+
   return (
     <header className="sticky top-0 left-0 right-0 z-50 h-[100px] bg-cover bg-center" style={{ backgroundImage: 'url("/images/flag-sky-background.jpg")' }}>
       {/* Semi-transparent overlay */}
